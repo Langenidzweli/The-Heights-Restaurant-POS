@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Heights POS</title>
+  <link rel="stylesheet" href="../styles-codes/main.css">
+  <link rel="stylesheet" href="../styles-codes/modals.css">
+</head>
+<body>
+  <div class="wrapper">
+    
+    <!-- Restaurant logo and title -->
+    <header class="header">
+      <img src="../Img/fork-and-knife-meal-2-svgrepo-com.svg" alt="Logo">
+      <h1>The Heights Restaurant POS</h1>
+    </header>
+
+    <main>
+      
+      <!-- DASHBOARD STATISTICS -->
+      <section class="dashboard-stats">
+        <div class="order-card">
+          <div class="card-header">
+            <h2>Total Orders</h2>
+            <img src="../Img/order-svgrepo-com.svg" alt="Orders">
+          </div>
+          <p id="num_of_orders">0</p>
+          <div class="order-type">
+            <p>Dine-in: <span id="num_of_dine_in">0</span></p>
+            <p>Takeout: <span id="num_of_takeout">0</span></p>
+          </div>
+        </div>
+
+        <div class="dine-in-card"> 
+          <div class="card-header">
+            <h2>Dine-in Pending Orders</h2>
+            <img src="../Img/queue-up-wait-line-up-svgrepo-com.svg" alt="Queue">
+          </div>
+          <p id="num_of_dine-in_queue">0</p>
+        </div>
+
+        <div class="takeout-queue-card">
+          <div class="card-header">
+            <h2>Takeout Pending Orders</h2>
+            <img src="../Img/queue-up-wait-line-up-svgrepo-com.svg" alt="Queue">
+          </div>
+          <p id="num_of_takeout_queue">0</p>
+        </div>
+
+        <div class="staff-card">
+          <div class="card-header">
+            <h2>Active Staff</h2>
+            <img src="../Img/staff-svgrepo-com.svg" alt="Staff">
+          </div>
+          <p id="num_of_staff">0</p>
+        </div>
+      </section>
+
+      <!-- QUICK ACTIONS -->
+      <section class="quick-actions-card">
+        <h2>Quick Actions</h2>
+        <div class="button-row">
+          <div class="take-order-btn">
+            <button id="openTakeOrderModalBtn">
+              <img src="../Img/order-1-svgrepo-com.svg" alt="Take Order"> Take Order
+            </button>
+          </div>
+          <div class="mark-paid-btn">
+            <button id="openMarkAsPaidModalBtn">
+              <img src="../Img/wallet-svgrepo-com.svg" alt="Paid"> Mark Paid
+            </button>
+          </div>
+          <div class="view-report-btn">
+            <button id="openViewReportsModalBtn">
+              <img src="../Img/reports-svgrepo-com.svg" alt="Reports"> View Reports
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODALS CONTAINER: Will be populated with modal HTML content -->
+      <div id="modals-container"></div>
+
+      <!-- TABLE STATUS -->
+      <section class="tables">
+        <div class="tables-heading">
+          <h2>Table Status</h2>
+          <p>Current occupancy and availability</p>
+        </div>
+        <div class="table-status">
+          <!-- Tables will be loaded here from backend -->
+        </div>
+      </section>
+
+      <!-- PENDING ORDERS-->
+      <section class="pending-orders">
+        <div class="pending-orders-card">
+          <h2>Pending Orders (<span id="pending-count">0</span>)</h2>
+          <p id="completion">Orders waiting for payment processing</p>
+          <div id="pending-orders-list" class="pending-orders-list">
+            <!-- Orders will be inserted here -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- JAVASCRIPT IMPORTS: Application functionality scripts -->
+    <script type="module" src="../js/api.js"></script>
+    <script type="module" src="../js/ui.js"></script>
+    <script type="module" src="../js/modals.js"></script>
+    <script type="module" src="../js/orders.js"></script>
+    <script type="module" src="../js/main.js"></script>
+  </div> 
+</body>
+</html>

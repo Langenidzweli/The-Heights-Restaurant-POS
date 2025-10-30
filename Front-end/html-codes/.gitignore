@@ -1,0 +1,15 @@
+# Java/Spring Boot
+target/
+*.jar
+*.war
+*.class
+*.log
+.env
+
+# Frontend / Node.js
+node_modules/
+dist/
+*.log
+
+# VSCode
+.vscode/

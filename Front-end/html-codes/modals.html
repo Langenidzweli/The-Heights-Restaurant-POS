@@ -1,0 +1,305 @@
+<!-- TAKE ORDER MODAL -->
+<div id="takeOrderModal" class="modal order-modal">
+  <div class="modal-content">
+    <span class="close" id="closeTakeOrderModal">&times;</span>
+
+    <!-- CUSTOMER REGISTRATION SECTION -->
+    <div class="takeout-left-section">
+        <h2>Register a new customer</h2>
+        <p>Create a new customer with order details</p>
+        <form>
+          <label for="ordertype">Order Type</label>
+          <select id="ordertype" name="ordertype" required>
+            <option value="">-- Select Order Type --</option>
+            <option value="1">Dine in</option>
+            <option value="0">Takeout</option>
+          </select>
+          <div id="groupSizeContainer">
+            <label for="groupSize">Group Size</label>
+            <select id="groupSize" name="groupSize" required>
+              <option value="">-- Select Group Size --</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4 People</option>
+              <option value="5">5 People</option>
+              <option value="6">6 People</option>
+              <option value="7">7 People</option>
+              <option value="8">8 People</option>
+            </select>
+          </div>
+          <div class="modal-buttons">
+            <button type="button" class="add-cust-btn" id="submitCustomerBtn">Add Customer</button>
+          </div>
+        </form>
+    </div>
+
+    <!-- ORDER CREATION SECTION -->
+    <div class="takeout-middle-section">
+      <h2>Take New Order</h2>
+      <p>Select customer, waiter, and add items to create an order</p>
+      <form>
+        
+        <!-- CUSTOMER SELECTION DROPDOWN-->
+        <label for="customerAction">Customer</label>
+        <div class="custom-select-dropdown">
+          <div class="dropdown-trigger">
+            <span class="selected-value">-- Select customer action --</span>
+          </div>
+          <div class="dropdown-options">
+            <label class="option-item">
+              <input type="radio" name="customerAction" value="new">
+              <span class="checkmark"></span>
+              <span class="option-text">New Customer (No Order Yet)</span>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="customerAction" value="update">
+              <span class="checkmark"></span>
+              <span class="option-text">Update an Existing Order</span>
+            </label>
+
+            <!-- NEW CUSTOMER DROPDOWN -->
+            <div id="newCustomerDropdownContainer" class="customer-selection-dropdown" style="display: none;">
+                <label for="newCustomerDropdown">Select Customer for New Order:</label>
+                <select id="newCustomerDropdown" class="form-control">
+                    <option value="">-- Select customer --</option>
+                </select>
+            </div>
+
+            <!-- UPDATE ORDER DROPDOWN -->
+            <div id="updateOrderDropdownContainer" class="customer-selection-dropdown" style="display: none;">
+                <label for="updateOrderDropdown">Select Customer to Update Order:</label>
+                <select id="updateOrderDropdown" class="form-control">
+                    <option value="">-- Select customer --</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hidden field to store selected customer ID -->
+        <input type="hidden" id="selectedCustomerId" value="">
+        
+        <!-- WAITER AND TABLE ASSIGNMENT -->
+        <label for="assignedWaiter">Assigned Waiter</label>
+        <input type="text" id="assignedWaiter" readonly value="Select customer to get assigned waiter">
+        <label for="assignedTable">Assigned Table</label>
+        <input type="text" id="assignedTable" readonly>
+        
+        <!-- ORDER ITEMS DISPLAY-->
+        <div class="order-items-card">
+          <h2>Order Items</h2>
+          <div class="order-list">
+            <p class="empty-msg">No items added yet</p>
+          </div>
+          <div class="overall-total-block" style="display: none;">
+            <h2>Total: <p>R <span id="overall-total">0.00</span></p></h2>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- MENU SELECTION SECTION -->
+    <div class="takeout-right-section">
+      <label for="menu">Menu</label>
+      <div class="menu-cards">
+        <!-- Menu will be loaded here from backend -->
+      </div>
+      <div class="modal-buttons">
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" class="add-btn" id="createOrderBtn">Create Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARK AS PAID MODAL -->
+<div id="markAsPaidModal" class="modal mark-as-paid">
+  <div class="modal-content">
+    <span class="close" id="closeMarkAsPaidModal">&times;</span>
+    <h2>Process Payment</h2>
+    <p>Mark an order as paid to close the order</p>
+    <form>
+      <label for="SelectOrderToMarkAsPaid">Select Order to Mark as Paid</label>
+      <select id="SelectOrderToMarkAsPaid">
+        <option value="">-- Choose unpaid order --</option>
+      </select>
+      <div class="display-unpaid-card">
+        <p>All orders are paid</p>
+      </div>
+      <div class="modal-buttons">
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" class="mark-btn" id="generateReceiptBtn">Generate Receipt & Pay</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- RECEIPT MODAL -->
+<div id="receiptModal" class="modal receipt-modal">
+  <div class="modal-content">
+    <span class="close" id="closeReceiptModal">&times;</span>
+    <div class="receipt-container">
+      <div class="receipt-header">
+        <h2>The Heights Restaurant</h2>
+        <p class="receipt-subtitle">Review and confirm payment</p>
+      </div>
+      <div class="receipt-body">
+        <!-- ORDER DETAILS SECTION-->
+        <div class="receipt-section">
+          <div class="receipt-row">
+            <span>Order #:</span>
+            <span id="receipt-order-id">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Date:</span>
+            <span id="receipt-date">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Type:</span>
+            <span id="receipt-type">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Customer:</span>
+            <span id="receipt-customer">-</span>
+          </div>
+          <div class="receipt-row">
+            <span>Served by:</span>
+            <span id="receipt-waiter">-</span>
+          </div>
+        </div>
+        <div class="receipt-divider"></div>
+        
+        <!-- ORDER ITEMS SECTION-->
+        <div class="receipt-section">
+          <h3>Items Ordered:</h3>
+          <div id="receipt-items" class="receipt-items">
+            <!-- Items will be inserted here -->
+          </div>
+        </div>
+        <div class="receipt-divider"></div>
+        
+        <!-- Final payment amount -->
+        <div class="receipt-section">
+          <div class="receipt-row total-row">
+            <span>TOTAL:</span>
+            <span id="receipt-total">R 0.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="receipt-footer">
+        <p class="thank-you">Thank you for dining with us!</p>
+        <p class="visit-again">Visit us again soon!</p>
+      </div>
+      <div class="receipt-actions">
+        <button type="button" class="cancel-btn">Cancel</button>
+        <button type="button" class="confirm-pay-btn" id="confirmPaymentBtn">Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW REPORTS MODAL-->
+<div id="viewReportsModal" class="modal view-reports">
+  <div class="modal-content">
+    <span class="close" id="closeViewReportsModal">&times;</span>
+    <h2>Daily Reports & Analytics</h2>
+    <p class="reports-heading">The Heights Business intelligence and performance metrics</p>
+    
+    <!-- REPORT TABS NAVIGATION -->
+    <div class="Daily-Reports-main-menu">
+      <button class="tab-btn" data-target="overview-breakdown">Overview</button>
+      <button class="tab-btn" data-target="staff-breakdown">Staff</button>
+      <button class="tab-btn" data-target="menu-breakdown">Menu</button>
+      <button class="tab-btn" data-target="finance-breakdown">finance</button>
+    </div>
+    
+    <!-- OVERVIEW TAB-->
+    <div class="tab-content overview-breakdown">
+      <div class="stats-card">
+        <div class="total-orders_card">
+          <h1>0</h1>
+          <p>Total Orders</p>
+        </div>
+        <div class="total-Revenue_card">
+          <h1>R <span>0</span></h1>
+          <p>Total Revenue</p>
+        </div>
+        <div class="avg-Order-value_card">
+          <h1>R <span>0</span></h1>
+          <p>Avg Order Value</p>
+        </div>
+        <div class="dine-in-rate_card">
+          <h1>%</h1>
+          <p>Dine-in Rate</p>
+        </div>
+      </div>
+      <div class="order-type-details">
+        <h1>Order Type Breakdown</h1>
+        <p class="order-type">Dine-In Orders <span>R</span></p>
+        <p class="description">0 orders</p>
+        <p class="order-type">Takeout Orders <span>R</span></p>
+        <p class="description">0 orders</p>
+      </div>
+    </div>
+    
+    <!-- STAFF PERFORMANCE TAB -->
+    <div class="tab-content staff-breakdown" style="display:none;">
+      <div class="staff-header">
+        <h1>Staff Performance</h1>
+      </div>
+      <table class="waiters-performance-table">
+        <thead>
+          <tr>
+            <th>Waiter</th>
+            <th>Dine Orders</th>
+            <th>Takeout Orders</th>
+            <th>Sales</th>
+            <th>Commission (15%)</th>
+            <th>Dine Status</th>
+          </tr>
+        </thead>
+        <tbody class="waiters-table-body">
+          <!-- Waiters will be loaded here from backend -->
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- MENU ANALYSIS -->
+    <div class="tab-content menu-breakdown" style="display:none;">
+      <h1>Menu Analysis</h1>
+      <p>Best-selling items, least ordered dishes, profit margins.</p>
+      <table class="menu-report-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Quantity Sold</th>
+            <th>Revenue</th>
+            <th>Avg Price</th>
+          </tr>
+        </thead>
+        <tbody class="menu-report-body">
+          <!-- rows will be inserted here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FINANCE TAB -->
+    <div class="tab-content finance-breakdown" style="display:none;">
+      <div class="finance-cards">
+        <div class="Revenue-card">
+          <h1>R <span>0</span></h1>
+          <p>Total Revenue</p>
+        </div>
+        <div class="staff-salary-card">
+          <h1>R <span>0</span></h1>
+          <p>Staff Salary</p>
+        </div>
+        <div class="total-income-card">
+          <h1>R <span>0</span></h1>
+          <p>Net Income</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
