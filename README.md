@@ -67,7 +67,7 @@ This project demonstrates practical applications of **data structures**, **algor
 ### Reports
 ![Reports](assets/images/reports.png)
 
-> Add more screenshots as your project grows. You can include different modals, order flows, and report views.
+
 
 ---
 
